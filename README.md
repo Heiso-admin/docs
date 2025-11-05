@@ -2,7 +2,7 @@
 
 ## NBEE 概述
 
-NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統。
+NBEE（Next-Gen Base Enterprise Engine）作為企業中台的基座。
 
 - 組成：Core‑BEE（擴充點與介面邊界）＋ 套件（依約定提供能力）
 - 用法：挑選所需能力並掛載到擴充點，按需組裝、快速替換
@@ -10,7 +10,7 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 
 ## 核心理念
 
-核心理念：以低耦合介面約定串接模組，支撐跨專案復用與演進。
+核心理念：以低耦合介面約定組裝模組，作為中台基座，支撐跨專案復用與演進。
 
 核心原則：
 - 邊界清楚：僅以公開 API／事件／資料模型互動；禁止隱式耦合與共享狀態。
