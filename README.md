@@ -32,11 +32,11 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 - 變更策略：對外介面採用 deprecate→替代→移除的節奏，保留過渡期與遷移指南
 
 落地實踐：
-- 模組目錄規範：server-actions／rsc／client／i18n／components／tests 標準化
-- 依賴聲明與版本管理：使用包管理與語義化版本，明確 peer／dev／prod 依賴
-- 契約測試（Contract Testing）與 Mock：以契約測試驗證公開 API；提供 Mock 以支援跨模組並行開發
-- CI/CD 流程：在合併前自動跑單元／整合測試與類型檢查，保證品質
-- 遷移流程：提供 checklist 與腳本，支援模組在專案間快速搬遷
+- 目錄：server-actions／rsc／client／i18n／components／tests
+- 依賴與版本：語義化版本；明確 peer／dev／prod
+- 測試：契約測試＋Mock（驗證公開 API，支援並行開發）
+- CI/CD：合併前跑單元／整合測試與型別檢查
+- 遷移：提供 checklist／腳本，跨專案快速搬遷
 
 ---
 
