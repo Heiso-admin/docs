@@ -4,9 +4,61 @@
 
 NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統。
 
-- 組成：Core‑BEE（擴充點與介面邊界）＋ Packages（依約定提供能力）
+- 組成：Core‑BEE（擴充點與介面邊界）＋ 套件（依約定提供能力）
 - 用法：挑選所需能力並掛載到擴充點，按需組裝、快速替換
 - 版本：採語義化版本，維持向後相容與漸進演進
+
+## 📑 目錄
+- 概述
+- 快速開始
+- 功能
+- 架構總覽／分層說明
+- 模組內部結構
+- 落地實踐
+- 專案結構範例
+- 指令
+- 技術棧
+- 名詞對齊
+- 授權
+
+## 🚀 快速開始
+git clone https://github.com/Heiso-admin/Core-BEE.git
+cd Core-BEE
+pnpm install
+設定資料庫：
+
+# 建立 .env.local，加入 DATABASE_URL 與 NEXTAUTH_SECRET
+pnpm db:push
+pnpm dev
+造訪 http://localhost:3000/signup 建立帳號。
+
+⚠️ 注意：註冊後，請在 developers 資料表加入自己的帳號，才能存取 /dev-center。
+
+## ✨ 功能
+- NextAuth v5，支援雙重驗證（2FA）
+- 以資源為中心的 RBAC 權限
+- Plate.js 編輯器與 AI
+- PostgreSQL 與 Drizzle ORM
+- 多語系（繁體中文、英文）
+- S3 檔案上傳
+- Radix、Tailwind v4、Shadcn UI
+- React Email 與 Resend
+
+## 🛠 技術棧
+- 核心：Next.js 16、React 19、TypeScript 5
+- 資料庫：PostgreSQL、Drizzle ORM
+- 驗證：NextAuth 5.0
+- 介面：Tailwind v4、Radix UI、Shadcn UI
+- 編輯器：Plate.js 49、AI SDK
+- 工具：Biome、pnpm、dotenv-flow
+
+## 🔧 指令
+pnpm dev          # 啟動開發伺服器
+pnpm build        # 產生正式版建置
+pnpm db:push      # 套用資料庫綱要
+pnpm db:studio    # 開啟資料庫介面
+pnpm lint         # 稽核程式碼
+pnpm format       # 格式化程式碼
 
 
 ## 🌐 核心理念
@@ -17,7 +69,7 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 - 邊界清楚：僅以公開 API／事件／資料模型互動；禁止隱式耦合與共享狀態。
 - 易移植、易組裝：避免框架鎖定與全域依賴；跨專案低成本復用。
 - 環境一致：標準化工具、配置與部署；行為可預期。
-- 插槽化架構：Core-BEE 提供擴充點與介面約定；Packages 可熱替換。
+- 擴充點架構：Core‑BEE 提供擴充點與介面約定；套件可熱替換。
 
 設計目標：
 - 降低重複開發成本，提升功能復用率
@@ -28,73 +80,53 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 設計約束：
 - 分層解耦：App／Modules／Components／Libraries 各司其職，不跨層直接依賴
 - 依賴向下不向上：模組僅依賴 Libraries／公共能力；禁止跨模組直接訪問私有實現
-- API 先行與文件化：接口定義、錯誤碼、型別約定、示例須完善並可自動生成（如 OpenAPI）
-- 變更策略：對外介面採用 deprecate→替代→移除的節奏，保留過渡期與遷移指南
+- API 先行與文件化：介面定義、錯誤碼、型別約定、示例可自動生成（如 OpenAPI）
+- 變更策略：deprecate→替代→移除，保留過渡期與遷移指南
 
 落地實踐：
 - 目錄：server-actions／rsc／client／i18n／components／tests
 - 依賴與版本：語義化版本；明確 peer／dev／prod
-- 測試：契約測試＋Mock（驗證公開 API，支援並行開發）
+- 測試：契約測試（Contract Testing）＋ Mock（驗證公開 API，支援並行開發）
 - CI/CD：合併前跑單元／整合測試與型別檢查
 - 遷移：提供 checklist／腳本，跨專案快速搬遷
 
 ---
 
+## 📘 名詞對齊
+
+- 擴充點（Slot）：Core‑BEE 暴露的掛載位置，用於裝配能力
+- 介面約定（Interface Contract）：模組互動的規範（API／事件／型別）
+- 提供者（Provider／Package）：依介面約定提供能力並掛載至擴充點
+
+---
+
 ## 🏗 架構總覽
 
-該架構將整個 Next.js 應用分為四個層級：
-
-- **App 層**：應用入口與整體組織  
-- **Modules 層**：業務邏輯模組化管理  
-- **Components 層**：共用 UI 與功能組件封裝  
-- **Libraries 層**：通用工具庫與第三方整合
+層級：**App**／**Modules**／**Components**／**Libraries**
 
 ---
 
 ## 🧩 架構分層說明
 
-### App 層
-負責整個應用的入口與組織：
-- **Modules**：各模組獨立實現業務邏輯，透過 API 或共享庫交互
-- **API Modules**：對應後端 API 的封裝與文件（支援 Swagger / OpenAPI）
-
-### Components 層
-封裝可重用的 UI 與業務組件：
-- **Custom Blocks**：自訂可重用組件  
-- **shadcn UI**：基於 shadcn/ui 的可定制基礎組件庫
-
-### Libraries 層
-提供通用工具庫與第三方整合：
-- **ORM**（Prisma / Drizzle ORM）  
-- **AWS SDK 封裝**  
-- **Hash / Utils / Email / i18n 工具模組**
+- App 層：應用入口與整體組織
+- Modules 層：業務模組與 API 封裝（支援 Swagger／OpenAPI）
+- Components 層：共用 UI 與 Blocks（基於 shadcn/ui）
+- Libraries 層：工具庫與第三方整合（ORM、AWS SDK、Utils、Email、i18n）
 
 ---
 
 ## 🧱 Module 內部結構
 
-每個模組的目錄結構固定，包含：
-
-- **Server Actions**：伺服器端邏輯（支援 Next.js 15 Server Actions）  
-- **RSCs**（React Server Components）：負責 SSR / 靜態生成  
-- **Client Components**：交互型組件（運行於瀏覽器端）  
-- **I18n Jsons**：多語言資源文件  
-- **Module Components**：模組專屬組件  
-- **Testing**：單元測試與整合測試
+每個模組目錄包含：伺服器動作（Server Actions）／RSC（React 伺服器元件）／用戶端元件（Client Components）／多語言（i18n JSON）／模組元件（Module Components）／測試（Testing）
 
 ---
 
-## 🚀 模組可移植性設計
+## 🚀 模組可移植性
 
-### 設計原則
-- 模組內依賴盡量自包含，減少全局依賴  
-- 公共依賴透過 **Libraries 層** 提供  
-- API 與 UI 解耦，遷移時僅需少量調整
-
-### 好處
-- **跨專案復用**：模組可直接移植  
-- **快速迭代**：功能更新不影響全局  
-- **團隊協作清晰**：模組邊界明確
+- 自包含依賴；公共依賴由 Libraries 層提供
+- API 與 UI 解耦；遷移低成本
+- 跨專案復用；更新不影響全局
+- 邊界清晰；協作明確
 
 ---
 
@@ -119,6 +151,62 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 ```
 
 ---
+可上線的管理後台，基於 Next.js 16，具備身分驗證、RBAC 權限、富文字編輯與模組化架構。
+
+注意：可在 `config/index.ts` 自訂品牌設定。
+
+功能
+- NextAuth v5，支援雙重驗證（2FA）
+- 以資源為中心的 RBAC 權限
+- Plate.js 編輯器與 AI
+- PostgreSQL 與 Drizzle ORM
+- 多語系（繁體中文、英文）
+- S3 檔案上傳
+- Radix、Tailwind v4、Shadcn UI
+- React Email 與 Resend
+
+快速開始
+git clone https://github.com/Heiso-admin/Core-BEE.git
+cd Core-BEE
+pnpm install
+設定資料庫：
+
+# 建立 .env.local，加入 DATABASE_URL 與 NEXTAUTH_SECRET
+pnpm db:push
+pnpm dev
+造訪 http://localhost:3000/signup 建立帳號。
+
+⚠️ 注意：註冊後，請在 developers 資料表加入自己的帳號，才能存取 /dev-center。
+
+文件
+- 安裝指南：完整安裝流程
+- 速查表：常用指令與程式碼片段
+- 專案結構：架構總覽
+- 設定：自訂你的應用
+
+技術棧
+- 核心：Next.js 16、React 19、TypeScript 5
+- 資料庫：PostgreSQL、Drizzle ORM
+- 驗證：NextAuth 5.0
+- 介面：Tailwind v4、Radix UI、Shadcn UI
+- 編輯器：Plate.js 49、AI SDK
+- 工具：Biome、pnpm、dotenv-flow
+
+指令
+pnpm dev          # 啟動開發伺服器
+pnpm build        # 產生正式版建置
+pnpm db:push      # 套用資料庫綱要
+pnpm db:studio    # 開啟資料庫介面
+pnpm lint         # 稽核程式碼
+pnpm format       # 格式化程式碼
+專案結構
+app/              # Next.js 路由
+modules/          # 功能模組
+lib/db/schema/    # 資料庫綱要
+server/services/  # 業務邏輯
+components/       # React 元件
+
+
 
 ## 📚 授權
 本專案採用 MIT License。
