@@ -1,26 +1,26 @@
 # Core-BEE 架構說明
 
-Core-BEE 是 NBEE 的插槽層（Slot Layer）；NBEE = Core-BEE + Packages（以契約為單位的可插拔能力）。
+Core-BEE 是 NBEE 的插槽層（Slot Layer）。NBEE = Core-BEE + Packages（以標準介面為邊界的可插拔能力）。
 
 ## 🧭 NBEE 概述
 
 NBEE 的理念是（Next-Gen Backoffice Enterprise Engine）：用來架構企業用的後台系統。
 
-- NBEE 組成：由 **Core-BEE（插槽與契約）** 與 **Packages（能力提供者）** 構成。
-- Core-BEE 角色：定義標準化插槽與契約（API／事件／型別），負責模組與能力的掛載、解析與生命週期管理。
-- Packages 角色：以 Provider 形式實作契約，插入對應插槽（例如：`Auth`、`Mailer`、`Storage`、`Queue`、`Payments`、`Search`）。
+- NBEE 組成：**Core-BEE** 提供能力插槽與介面邊界，**Packages** 依介面約定提供並掛載能力。
+- Core-BEE 角色：定義標準化插槽與介面約定（API／事件／型別），負責模組與能力的掛載、解析與生命週期管理。
+- Packages 角色：以 Provider 形式實作介面約定，插入對應插槽（例如：`Auth`、`Mailer`、`Storage`、`Queue`、`Payments`、`Search`）。
 - 使用方式：專案只需選擇合適的 Packages 即可在 Core-BEE 提供的插槽上組裝能力，達到按需組裝與快速替換。
-- 版本與相容：以語義化版本管理契約與實作，保證插槽與 Packages 的向後相容與漸進式演進。
+- 版本與相容：以語義化版本管理介面與實作，保證插槽與 Packages 的向後相容與漸進式演進。
 
 ## 🌐 核心理念
 
-**Core-BEE (Next Backoffice Environment)** 的核心理念聚焦於「可組裝的模組化後端」，以低耦合的契約為連接機制，支撐跨專案的快速復用與演進。
+**Core-BEE (Next Backoffice Environment)** 的核心理念聚焦於「可組裝的模組化後端」，以低耦合的介面約定作為連接機制，支撐跨專案的快速復用與演進。
 
 核心原則：
-- 清晰邊界與契約：每個模組僅以公開 API／事件／資料模型對外；禁止隱式耦合與共享內部狀態。
+- 清晰邊界與介面：每個模組僅以公開 API／事件／資料模型對外；禁止隱式耦合與共享內部狀態。
 - 可移植與可組裝：模組避免框架鎖定與全域依賴；在不同專案可零／低改動直接復用。
 - 一致且可預期的環境：標準化工具、配置與部署流程，確保模組在各環境行為一致。
-- 插槽化（Slot-based）架構：Core-BEE 提供插槽與契約，Packages 以 Provider 形式插入並可熱替換。
+- 插槽化（Slot-based）架構：Core-BEE 提供插槽與介面約定，Packages 以 Provider 形式插入並可熱替換。
 
 設計目標：
 - 降低重複開發成本，提升功能復用率
@@ -31,13 +31,13 @@ NBEE 的理念是（Next-Gen Backoffice Enterprise Engine）：用來架構企�
 設計約束：
 - 分層解耦：App／Modules／Components／Libraries 各司其職，不跨層直接依賴
 - 依賴向下不向上：模組僅依賴 Libraries／公共能力；禁止跨模組直接訪問私有實現
-- API 先行與文件化：接口定義、錯誤碼、型別契約、示例須完善並可自動生成（如 OpenAPI）
-- 變更策略：對外契約採用 deprecate→替代→移除的節奏，保留過渡期與遷移指南
+- API 先行與文件化：接口定義、錯誤碼、型別約定、示例須完善並可自動生成（如 OpenAPI）
+- 變更策略：對外介面採用 deprecate→替代→移除的節奏，保留過渡期與遷移指南
 
 落地實踐：
 - 模組目錄規範：server-actions／rsc／client／i18n／components／tests 標準化
 - 依賴聲明與版本管理：使用包管理與語義化版本，明確 peer／dev／prod 依賴
-- 契約測試與 Mock：以契約測試驗證公開 API；提供 Mock 以支援跨模組並行開發
+- 契約測試（Contract Testing）與 Mock：以契約測試驗證公開 API；提供 Mock 以支援跨模組並行開發
 - CI/CD 流程：在合併前自動跑單元／整合測試與類型檢查，保證品質
 - 遷移流程：提供 checklist 與腳本，支援模組在專案間快速搬遷
 
