@@ -1,12 +1,11 @@
 # Core-BEE 架構說明
 
 ## NBEE 概述
+NBEE = Next‑Gen Base Enterprise Engine
 
-NBEE（Next‑Gen Base Enterprise Environment）用於構建企業中台。
+一個專為企業設計的中台架構，幫助團隊像「組樂高」一樣快速構建系統。
 
-- 組成：Core‑BEE（擴充點與介面邊界）＋ 套件（依約定提供能力）
-- 用法：挑選所需能力並掛載到擴充點，按需組裝、快速替換
-- 版本：採語義化版本，維持向後相容與漸進演進
+它由 Core‑BEE（核心引擎）＋ 各類功能套件（mini app）組成，讓企業能自由選擇、組裝、替換所需能力。
 
 ## 核心理念
 
