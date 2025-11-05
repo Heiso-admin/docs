@@ -1,6 +1,6 @@
 # Core-BEE 架構說明
 
-## 🧭 NBEE 概述
+## NBEE 概述
 
 NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統。
 
@@ -8,7 +8,7 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 - 用法：挑選所需能力並掛載到擴充點，按需組裝、快速替換
 - 版本：採語義化版本，維持向後相容與漸進演進
 
-## 🌐 核心理念
+## 核心理念
 
 核心理念：以低耦合介面約定串接模組，支撐跨專案復用與演進。
 
@@ -28,7 +28,7 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 - 介面先行、文件自動化（OpenAPI）
 - 漸進變更：棄用→替代→移除，保留過渡期
 
-## 📑 目錄
+## 目錄
 - 概述
 - 核心理念
 - 快速開始
@@ -42,7 +42,7 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 - 名詞對齊
 - 授權
 
-## 🚀 快速開始
+## 快速開始
 git clone https://github.com/Heiso-admin/Core-BEE.git
 cd Core-BEE
 pnpm install
@@ -55,7 +55,7 @@ pnpm dev
 
 ⚠️ 注意：註冊後，請在 developers 資料表加入自己的帳號，才能存取 /dev-center。
 
-## ✨ 功能
+## 功能
 - NextAuth v5，支援雙重驗證（2FA）
 - 以資源為中心的 RBAC 權限
 - Plate.js 編輯器與 AI
@@ -65,7 +65,7 @@ pnpm dev
 - Radix、Tailwind v4、Shadcn UI
 - React Email 與 Resend
 
-## 🛠 技術棧
+## 技術棧
 - 核心：Next.js 16、React 19、TypeScript 5
 - 資料庫：PostgreSQL、Drizzle ORM
 - 驗證：NextAuth 5.0
@@ -73,7 +73,7 @@ pnpm dev
 - 編輯器：Plate.js 49、AI SDK
 - 工具：Biome、pnpm、dotenv-flow
 
-## 🔧 指令
+## 指令
 pnpm dev          # 啟動開發伺服器
 pnpm build        # 產生正式版建置
 pnpm db:push      # 套用資料庫綱要
@@ -92,7 +92,7 @@ pnpm format       # 格式化程式碼
 
 ---
 
-## 📘 名詞對齊
+## 名詞對齊
 
 - 擴充點（Slot）：Core‑BEE 暴露的掛載位置，用於裝配能力
 - 介面約定（Interface Contract）：模組互動的規範（API／事件／型別）
@@ -100,13 +100,13 @@ pnpm format       # 格式化程式碼
 
 ---
 
-## 🏗 架構總覽
+## 架構總覽
 
 層級：**App**／**Modules**／**Components**／**Libraries**
 
 ---
 
-## 🧩 架構分層說明
+## 架構分層說明
 
 - App 層：應用入口與整體組織
 - Modules 層：業務模組與 API 封裝（支援 Swagger／OpenAPI）
@@ -115,13 +115,13 @@ pnpm format       # 格式化程式碼
 
 ---
 
-## 🧱 Module 內部結構
+## Module 內部結構
 
 每個模組目錄包含：伺服器動作（Server Actions）／RSC（React 伺服器元件）／用戶端元件（Client Components）／多語言（i18n JSON）／模組元件（Module Components）／測試（Testing）
 
 ---
 
-## 🚀 模組可移植性
+## 模組可移植性
 
 - 自包含依賴；公共依賴由 Libraries 層提供
 - API 與 UI 解耦；遷移低成本
@@ -130,7 +130,7 @@ pnpm format       # 格式化程式碼
 
 ---
 
-## 📁 專案結構範例
+## 專案結構範例
 
 ```
 /app
@@ -208,5 +208,5 @@ components/       # React 元件
 
 
 
-## 📚 授權
+## 授權
 本專案採用 MIT License。
