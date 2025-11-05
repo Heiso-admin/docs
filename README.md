@@ -29,18 +29,13 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 - 漸進變更：棄用→替代→移除，保留過渡期
 
 ## 目錄
-- 概述
-- 核心理念
-- 快速開始
-- 功能
-- 架構總覽／分層說明
-- 模組內部結構
-- 落地實踐
-- 專案結構範例
-- 指令
-- 技術棧
-- 名詞對齊
-- 授權
+- [概述](#nbee-概述)
+- [核心理念](#核心理念)
+- [快速開始](#快速開始)
+- [功能](#功能)
+- [技術棧](#技術棧)
+- [指令](#指令)
+- [授權](#授權)
 
 ## 快速開始
 git clone https://github.com/Heiso-admin/Core-BEE.git
@@ -74,12 +69,14 @@ pnpm dev
 - 工具：Biome、pnpm、dotenv-flow
 
 ## 指令
+```
 pnpm dev          # 啟動開發伺服器
 pnpm build        # 產生正式版建置
 pnpm db:push      # 套用資料庫綱要
 pnpm db:studio    # 開啟資料庫介面
 pnpm lint         # 稽核程式碼
 pnpm format       # 格式化程式碼
+```
 
 
 
