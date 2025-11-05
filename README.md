@@ -38,17 +38,22 @@ NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統�
 - [授權](#授權)
 
 ## 快速開始
+- 取得專案與安裝依賴
+```
 git clone https://github.com/Heiso-admin/Core-BEE.git
 cd Core-BEE
 pnpm install
-設定資料庫：
+```
 
-# 建立 .env.local，加入 DATABASE_URL 與 NEXTAUTH_SECRET
+- 設定環境與啟動
+```
+# .env.local 需包含 DATABASE_URL 與 NEXTAUTH_SECRET
 pnpm db:push
 pnpm dev
-造訪 http://localhost:3000/signup 建立帳號。
+```
 
-⚠️ 注意：註冊後，請在 developers 資料表加入自己的帳號，才能存取 /dev-center。
+- 首次註冊：造訪 http://localhost:3000/signup 建立帳號
+- 注意：註冊後於 `developers` 資料表加入自己的帳號以存取 `/dev-center`
 
 ## 功能
 - NextAuth v5，支援雙重驗證（2FA）
