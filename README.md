@@ -8,7 +8,7 @@ NBEE 的理念是（Next-Gen Backoffice Enterprise Engine）：用來架構企�
 
 - NBEE 組成：**Core-BEE** 提供能力插槽與介面邊界，**Packages** 依介面約定提供並掛載能力。
 - Core-BEE 角色：定義標準化插槽與介面約定（API／事件／型別），負責模組與能力的掛載、解析與生命週期管理。
-- Packages 角色：以 Provider 形式實作介面約定，插入對應插槽（例如：`Auth`、`Mailer`、`Storage`、`Queue`、`Payments`、`Search`）。
+- Packages 角色：以 Provider 形式實作介面約定，於 Modules 層（例如 `/app/modules`）插入對應能力插槽（如：`Auth`、`Mailer`、`Storage`、`Queue`、`Payments`、`Search`）。
 - 使用方式：專案只需選擇合適的 Packages 即可在 Core-BEE 提供的插槽上組裝能力，達到按需組裝與快速替換。
 - 版本與相容：以語義化版本管理介面與實作，保證插槽與 Packages 的向後相容與漸進式演進。
 
