@@ -90,6 +90,7 @@ pnpm format       # 格式化程式碼
 ## Dev Center
 
 - 入口：`/dev-center`。首次註冊後，於 `developers` 資料表加入自己的帳號即可存取。
+- 目標：讓工程師不必處理基礎設施設定，只專注在模組內的 business logic。
 - 功能項：
   - Team：以團隊為單位管理成員與資源邊界。
   - Role：可重用的權限模板（資源／操作），可指派給團隊或成員。
@@ -101,19 +102,6 @@ pnpm format       # 格式化程式碼
   - API Docs：瀏覽與測試 API；基於 OpenAPI 自動生成。
   - Keys：集中管理應用密鑰與第三方服務憑證。
 
-### 工程師 Tool Kit
-
-目標：讓工程師不必處理基礎設施設定，只專注在模組內的 business logic。
-
-- API Keys：一鍵發行／輪替／停用，設定 Scope 與有效期。
-- API Docs：即看即測（OpenAPI 驅動），提供 curl／snippet 便於整合。
-- Permission：以資源為中心設計權限，建立角色模板並套用到開發者。
-- Keys：集中管理應用密鑰與第三方憑證，支援標記與審計。
-- Developers：建立／停用開發者、綁定角色與權限，維持協作邊界。
-- Menu：編輯管理後台菜單與可見性，快速對齊產品導覽。
- - Team：以團隊維度管理成員、環境與資源邊界。
- - Role：建立可重用的權限模板，快速指派到團隊或成員。
- - O365：與 Microsoft 365（Azure AD/Entra ID）整合；支援 SSO 與使用者／群組同步、角色映射。
 
 快速流程示例：
 - 定義資源與操作 → 建立角色模板 → 發行 API Key（設定 Scope）→ 在 API Docs 驗證呼叫 → 交付模組業務邏輯。
