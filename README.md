@@ -1,26 +1,26 @@
 # Core-BEE 架構說明
 
-Core-BEE 是 NBEE 的插槽層（Slot Layer）。NBEE = Core-BEE + Packages（以標準介面為邊界的可插拔能力）。
-
 ## 🧭 NBEE 概述
 
 NBEE 的理念是（Next-Gen Backoffice Enterprise Engine）：用來架構企業用的後台系統。
 
-- NBEE 組成：**Core-BEE** 提供能力插槽與介面邊界，**Packages** 依介面約定提供並掛載能力。
+- NBEE 組成：**Core-BEE** 提供擴充點與介面邊界，**Packages** 依介面約定提供並掛載能力。
 - Core-BEE 角色：定義標準化插槽與介面約定（API／事件／型別），負責模組與能力的掛載、解析與生命週期管理。
-- Packages 角色：以 Provider 形式實作介面約定，於 Modules 層（例如 `/app/modules`）插入對應能力插槽（如：`Auth`、`Mailer`、`Storage`、`Queue`、`Payments`、`Search`）。
-- 使用方式：專案只需選擇合適的 Packages 即可在 Core-BEE 提供的插槽上組裝能力，達到按需組裝與快速替換。
-- 版本與相容：以語義化版本管理介面與實作，保證插槽與 Packages 的向後相容與漸進式演進。
+- Packages 角色：以 Provider 形式實作介面約定，於 Modules 層（例如 `/app/modules`）掛載至相應擴充點（如：`Auth`、`Mailer`、`Storage`、`Queue`、`Payments`、`Search`）。
+- Core-BEE 是 NBEE 的擴充點層（Slot Layer）。NBEE = Core-BEE + Packages（以標準介面為邊界的可插拔能力）。
+- 使用方式：專案只需選擇合適的 Packages 即可在 Core-BEE 提供的擴充點上組裝能力，達到按需組裝與快速替換。
+- 版本與相容：以語義化版本管理介面與實作，保證擴充點與 Packages 的向後相容與漸進式演進。
+
 
 ## 🌐 核心理念
 
 **Core-BEE (Next Backoffice Environment)** 的核心理念聚焦於「可組裝的模組化後端」，以低耦合的介面約定作為連接機制，支撐跨專案的快速復用與演進。
 
 核心原則：
-- 清晰邊界與介面：每個模組僅以公開 API／事件／資料模型對外；禁止隱式耦合與共享內部狀態。
-- 可移植與可組裝：模組避免框架鎖定與全域依賴；在不同專案可零／低改動直接復用。
-- 一致且可預期的環境：標準化工具、配置與部署流程，確保模組在各環境行為一致。
-- 插槽化（Slot-based）架構：Core-BEE 提供插槽與介面約定，Packages 以 Provider 形式插入並可熱替換。
+- 邊界清楚：僅以公開 API／事件／資料模型互動；禁止隱式耦合與共享狀態。
+- 易移植、易組裝：避免框架鎖定與全域依賴；跨專案低成本復用。
+- 環境一致：標準化工具、配置與部署；行為可預期。
+- 插槽化架構：Core-BEE 提供擴充點與介面約定；Packages 可熱替換。
 
 設計目標：
 - 降低重複開發成本，提升功能復用率
