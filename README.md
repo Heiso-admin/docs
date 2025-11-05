@@ -2,19 +2,16 @@
 
 ## 🧭 NBEE 概述
 
-NBEE 的理念是（Next-Gen Backoffice Enterprise Engine）：用來架構企業用的後台系統。
+NBEE（Next‑Gen Backoffice Enterprise Engine）用於構建企業後台系統。
 
-- NBEE 組成：**Core-BEE** 提供擴充點與介面邊界，**Packages** 依介面約定提供並掛載能力。
-- Core-BEE 角色：定義標準化插槽與介面約定（API／事件／型別），負責模組與能力的掛載、解析與生命週期管理。
-- Packages 角色：以 Provider 形式實作介面約定，於 Modules 層（例如 `/app/modules`）掛載至相應擴充點（如：`Auth`、`Mailer`、`Storage`、`Queue`、`Payments`、`Search`）。
-- Core-BEE 是 NBEE 的擴充點層（Slot Layer）。NBEE = Core-BEE + Packages（以標準介面為邊界的可插拔能力）。
-- 使用方式：專案只需選擇合適的 Packages 即可在 Core-BEE 提供的擴充點上組裝能力，達到按需組裝與快速替換。
-- 版本與相容：以語義化版本管理介面與實作，保證擴充點與 Packages 的向後相容與漸進式演進。
+- 組成：Core‑BEE（擴充點與介面邊界）＋ Packages（依約定提供能力）
+- 用法：挑選所需能力並掛載到擴充點，按需組裝、快速替換
+- 版本：採語義化版本，維持向後相容與漸進演進
 
 
 ## 🌐 核心理念
 
-**Core-BEE (Next Backoffice Environment)** 的核心理念聚焦於「可組裝的模組化後端」，以低耦合的介面約定作為連接機制，支撐跨專案的快速復用與演進。
+核心理念：以低耦合介面約定串接模組，支撐跨專案復用與演進。
 
 核心原則：
 - 邊界清楚：僅以公開 API／事件／資料模型互動；禁止隱式耦合與共享狀態。
@@ -98,31 +95,6 @@ NBEE 的理念是（Next-Gen Backoffice Enterprise Engine）：用來架構企�
 - **跨專案復用**：模組可直接移植  
 - **快速迭代**：功能更新不影響全局  
 - **團隊協作清晰**：模組邊界明確
-
----
-
-## ⚖️ 優缺點分析
-
-### 優點
-- 高可移植性，遷移成本低  
-- 結構清晰，易於維護與擴展  
-- 模組內測試完善，方便驗證功能  
-- UI 與邏輯解耦，提升渲染效能  
-- 國際化內建支援
-
-### 潛在挑戰
-- 初期架構設計成本較高  
-- 團隊需遵守統一模組規範  
-- 跨模組溝通需依賴明確 API 文件
-
----
-
-## 🧭 適用場景
-
-- 企業級管理後台（Admin Portal）  
-- 模組化 B2B / SaaS 系統  
-- 多國語系應用（i18n）  
-- 快速孵化與複用型產品架構  
 
 ---
 
